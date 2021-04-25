@@ -1,15 +1,25 @@
+from typing import Callable
+
+
 def leap_year(year: int) -> bool:
     return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
 
-def int_input(message: str):
-    while True:
-        try:
-            answer = input(message)
-            i = int(answer)
-            return i
-        except ValueError:
-            print("Input is not an integer.")
-    raise RuntimeError()
+
+def validate_int(s: str) -> bool:
+    try:
+        int(s)
+        return True
+    except ValueError:
+        print("Input was not an integer.")
+        return False
+
+
+def int_input(message: str, validate: Callable[[str], bool] = validate_int) -> int:
+    answer = input(message)
+    while not validate(answer):
+        answer = input(message)
+    return int(answer)
+
 
 if __name__ == "__main__":
     year: int = int_input("Please enter a year: ")
