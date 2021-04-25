@@ -11,4 +11,6 @@ def int_input(message: str):
             print("Input is not an integer.")
     raise RuntimeError()
 
-print(leap_year(int_input("Enter a year: ")))
+if __name__ == "__main__":
+    year: int = int_input("Please enter a year: ")
+    print(f"The year {year} is{' ' if leap_year(year) else ' not '}a leap year.")
