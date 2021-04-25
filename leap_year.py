@@ -14,6 +14,13 @@ def validate_int(s: str) -> bool:
         return False
 
 
+def validate_year(s: str) -> bool:
+    if int(s) > 0:
+        return True
+    print("Years cannot be negative or zero.")
+    return False
+
+
 def int_input(message: str, validate: Callable[[str], bool] = validate_int) -> int:
     answer = input(message)
     while not validate(answer):
@@ -22,5 +29,5 @@ def int_input(message: str, validate: Callable[[str], bool] = validate_int) -> i
 
 
 if __name__ == "__main__":
-    year: int = int_input("Please enter a year: ")
+    year: int = int_input("Please enter a year: ", lambda s: validate_int(s) and validate_year(s))
     print(f"The year {year} is{' ' if leap_year(year) else ' not '}a leap year.")
